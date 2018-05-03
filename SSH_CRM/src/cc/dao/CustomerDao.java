@@ -6,10 +6,7 @@ import org.hibernate.criterion.DetachedCriteria;
 
 import cc.domain.Customer;
 
-public interface CustomerDao {
+public interface CustomerDao extends BaseDao<Customer>{
 
-	Integer getTotalCount(DetachedCriteria dc);
-
-	List<Customer> getPageList(DetachedCriteria dc, Integer start, Integer currentCount);
-
+	
 }

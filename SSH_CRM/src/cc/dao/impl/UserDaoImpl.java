@@ -23,7 +23,7 @@ import cc.domain.*;
 
 /*@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")*/
-public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
+public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
 	
 	/*@Resource(name="sessionFactory")
 	private SessionFactory sf;*/
@@ -73,10 +73,6 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 		
 		tx.commit();
 		session.close();*/
-	}
-
-	public void save(User u) {
-		getHibernateTemplate().save(u);
 	}
 
 }

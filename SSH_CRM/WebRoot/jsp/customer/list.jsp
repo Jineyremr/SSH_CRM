@@ -152,7 +152,7 @@
 												<input type="text" size="3" id="currentPage" name="currentPage" value="<s:property value="#pageBean.currentPage" />"/>
 												页
 												
-												<input type="button" value="Go" onclick="to_page(currentPage)"/>
+												<input type="button" value="Go" onclick="to_page($('#currentPage').val())"/>
 											</DIV>
 									</SPAN></TD>
 								</TR>
