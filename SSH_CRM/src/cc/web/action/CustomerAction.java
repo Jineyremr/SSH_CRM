@@ -16,9 +16,13 @@ import cc.service.UserService;
 import cc.utils.PageBean;
 
 public class CustomerAction extends ActionSupport implements ModelDriven<Customer> {
-	Customer customer = new Customer();
+	private Customer customer = new Customer();
 	private CustomerService cs;
 	
+	public void setCs(CustomerService cs) {
+		this.cs = cs;
+	}
+
 	private Integer currentPage;
 	private Integer currentCount;
 	
@@ -38,11 +42,9 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 		this.currentCount = currentCount;
 	}
 
-	public void setCustomerService(CustomerService cs) {
-		this.cs = cs;
-	}
-
+	
 	public String list(){
+		System.out.println(currentCount);
 		//创建离线查询对象
 		DetachedCriteria dc = DetachedCriteria.forClass(Customer.class);
 		//判断并封装参数
@@ -51,8 +53,8 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 		}
 		//调用service查询分页数据
 		PageBean pb = cs.getPageBean(dc,currentPage,currentCount);
-		//将pageBean放入session域
-		ActionContext.getContext().getSession().put("pageBean", pb);
+		//将pageBean放入request域
+		ActionContext.getContext().put("pageBean", pb);
 		return "list";
 		
 	}

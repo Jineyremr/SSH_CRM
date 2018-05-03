@@ -68,17 +68,17 @@
 
 	<!-- action -->
 	<bean name="userAction" class="cc.web.action.UserAction" scope="prototype">
-		<property name="userService" ref="userServcie"></property>
+		<property name="userService" ref="userService"></property>
 	</bean>
 	<bean name="customerAction" class="cc.web.action.CustomerAction" scope="prototype">
-		<property name="cs" ref="customerServcie"></property>
+		<property name="cs" ref="customerService"></property>
 	</bean>
 	
 	<!-- service -->
 	<bean name="userService" class="cc.service.impl.UserServiceImpl">
 		<property name="ud" ref="userDao"></property>
 	</bean>
-	<bean name="customerServcie" class="cc.service.impl.CustomerServiceImpl">
+	<bean name="customerService" class="cc.service.impl.CustomerServiceImpl">
 		<property name="cd" ref="customerDao"></property>
 	</bean>
 	

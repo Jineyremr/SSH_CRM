@@ -23,7 +23,7 @@ public class PageBean {
 		this.totalCount = totalCount;
 		
 		if(this.currentPage==null){
-			this.currentCount=1;
+			this.currentPage=1;
 		}
 		
 		if(this.currentCount==null){
