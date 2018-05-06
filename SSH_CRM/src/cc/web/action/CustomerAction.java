@@ -43,7 +43,7 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 	}
 
 	
-	public String list(){
+	public String list() throws Exception{
 		System.out.println(currentCount);
 		//创建离线查询对象
 		DetachedCriteria dc = DetachedCriteria.forClass(Customer.class);
@@ -59,6 +59,19 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 		
 	}
 
+	public String add() throws Exception{
+		
+		
+		//调用service保存customer
+		cs.add(customer);
+		//转发至customeraction
+		
+		
+		return "toList";
+		
+	}
+	
+	
 	public Customer getModel() {
 		// TODO Auto-generated method stub
 		return customer;

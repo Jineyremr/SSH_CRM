@@ -31,4 +31,11 @@ public class CustomerServiceImpl implements CustomerService {
 		return pb;
 	}
 
+
+	public void add(Customer customer) {
+		//维护customer与baseDict关系
+		//保存customer
+		cd.save(customer);
+	}
+
 }
