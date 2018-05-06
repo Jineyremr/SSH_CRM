@@ -1,5 +1,6 @@
 package cc.web.action;
 
+import java.io.File;
 import java.util.List;
 
 import org.apache.struts2.ServletActionContext;
@@ -15,10 +16,13 @@ public class BaseDictAction extends ActionSupport{
 
 	
 	private String dict_type_code;
-	private BaseDictService bds; 
-	
-	
-	public String execute() throws Exception{
+	private BaseDictService bds;
+	//对象名得与name名称相同。struts会自动将图片封装为对象。
+	private File photo;
+	private String photoFileName;
+
+
+	public String execute() throws Exception{		
 		
 		//调用service查list
 		List<BaseDict> list = bds.getByTypeCode(dict_type_code);
@@ -45,5 +49,7 @@ public class BaseDictAction extends ActionSupport{
 	public void setDict_type_code(String dict_type_code) {
 		this.dict_type_code = dict_type_code;
 	}
+	
+	
 	
 }

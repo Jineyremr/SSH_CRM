@@ -35,7 +35,12 @@ public class CustomerServiceImpl implements CustomerService {
 	public void add(Customer customer) {
 		//维护customer与baseDict关系
 		//保存customer
-		cd.save(customer);
+		cd.saveOrUpdate(customer);
+	}
+
+
+	public Customer getById(Long cust_id) {
+		return cd.getById(cust_id);
 	}
 
 }

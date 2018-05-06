@@ -11,4 +11,6 @@ public interface CustomerService {
 
 	public void add(Customer customer);
 
+	public Customer getById(Long cust_id);
+
 }

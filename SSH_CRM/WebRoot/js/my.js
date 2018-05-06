@@ -18,6 +18,7 @@ function loadBaseDict(typecode,location,dict_id,selected){
 				var $option = $("<option value='"+json['dict_id']+"'>"+json["dict_item_name"]+"</option>");
 				
 				if(json['dict_id'] == selected){
+					alert(selected);
 					//判断是否需要回显
 					$option.attr("selected","selected");
 				}
