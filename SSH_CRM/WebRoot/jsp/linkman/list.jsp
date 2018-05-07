@@ -1,6 +1,7 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib  prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,20 +12,25 @@
 	rel=stylesheet>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.4.min.js"></script>
 <SCRIPT language=javascript>
-	function to_page(page){
-		if(page){
-			$("#page").val(page);
+	function to_page(currentPage){
+		if(currentPage){
+			$("#currentPage").val(currentPage);
+			
 		}
 		document.customerForm.submit();
 		
-	}
+	};
+	
+	function changePageSize(){
+		$("#customerForm").submit();
+	};
 </SCRIPT>
 
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
 </HEAD>
 <BODY>
 	<FORM id="customerForm" name="customerForm"
-		action="${pageContext.request.contextPath }/linkmanServlet?method=list"
+		action="${pageContext.request.contextPath }/LinkManAction_list"
 		method=post>
 		
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
@@ -63,10 +69,15 @@
 												<TR>
 													<TD>联系人名称：</TD>
 													<TD><INPUT class=textbox id=sChannel2
-														style="WIDTH: 80px" maxLength=50 name="lkmName"></TD>
+														style="WIDTH: 80px" maxLength=50 name="lkm_name" value="${param['lkm_name']}"></TD>
 													
-													<TD><INPUT class=button id=sButton2 type=submit
-														value=" 筛选 " name=sButton2></TD>
+													<TD>客户名称：</TD>
+													<TD><INPUT class=textbox style="WIDTH: 80px" maxLength=50 name="cust_name"  id="cust_name" value="${param['cust_name']}" >
+													<input type="hidden" name="customer.cust_id" id="cust_id" value="${param['customer.cust_id'] }"/>
+													<input type="button" value="选择客户" onclick="window.open('${pageContext.request.contextPath}/CustomerAction_list?select=true','','width=800,height=300')" /></TD>
+													<TD>
+														<INPUT class=button id=sButton2 type=submit
+														value=" 筛选 " name=sButton2>
 												</TR>
 											</TBODY>
 										</TABLE>
@@ -87,22 +98,30 @@
 													<TD>手机</TD>
 													<TD>操作</TD>
 												</TR>
-												<c:forEach items="${list }" var="linkman">
-												<TR
+												<s:iterator value="#pageBean.list" var="lkm" >
+												<TR 		
 													style="FONT-WEIGHT: normal; FONT-STYLE: normal; BACKGROUND-COLOR: white; TEXT-DECORATION: none">
-													<TD>${linkman.lkmName }</TD>
-													<TD>${linkman.lkmGender }</TD>
-													<TD>${linkman.lkmPhone }</TD>
-													<TD>${linkman.lkmMobile }</TD>
+													<TD>
+														<s:property value="#lkm.lkm_name" />
+													</TD>
+													<TD>
+													<s:property value="#lkm.lkm_gender=='1'?'男':'女'" />
+													</'D>
+													<TD>
+													<s:property value="#lkm.lkm_phone" />
+													</TD>
+													<TD>
+													<s:property value="#lkm.lkm_mobile" />
+													</TD>
 													
 													<TD>
-													<a href="${pageContext.request.contextPath }/linkmanServlet?method=edit&lkmId=${linkman.lkmId}">修改</a>
-													&nbsp;&nbsp;
-													<a href="${pageContext.request.contextPath }/linkmanServlet?method=delete&lkmId=${linkman.lkmId}">删除</a>
+														
+															<a href="${pageContext.request.contextPath }/LinkManAction_toEdit?lkm_id=<s:property value="#lkm.lkm_id" />">修改</a>
+															&nbsp;&nbsp;
+															<a href="${pageContext.request.contextPath }/customerServlet?method=delete&custId=${customer.cust_id}">删除</a>
 													</TD>
 												</TR>
-												
-												</c:forEach>
+												</s:iterator>
 
 											</TBODY>
 										</TABLE>
@@ -113,22 +132,22 @@
 									<TD><SPAN id=pagelink>
 											<DIV
 												style="LINE-HEIGHT: 20px; HEIGHT: 20px; TEXT-ALIGN: right">
-												共[<B>${total}</B>]条记录,[<B>${totalPage}</B>]页
+												共[<B><s:property value="#pageBean.totalCount" /></B>]条记录,[<B><s:property value="#pageBean.totalPage" /></B>]页
 												,每页显示
-												<select name="pageSize">
+												<select name="currentCount" onchange="changePageSize()" id="currentCountSelect">
 												
-												<option value="1" <c:if test="${pageSize==1 }">selected</c:if>>1</option>
-												<option value="30" <c:if test="${pageSize==30 }">selected</c:if>>30</option>
+												<option value="3" <s:property value="#pageBean.currentCount==3?'selected':''" />>3</option>
+												<option value="5" <s:property value="#pageBean.currentCount==5?'selected':''" />>5</option>
 												</select>
 												条
-												[<A href="javascript:to_page(${page-1})">前一页</A>]
-												<B>${page}</B>
-												[<A href="javascript:to_page(${page+1})">后一页</A>] 
+												[<A href="javascript:void(0);" onclick="to_page(<s:property value="#pageBean.currentPage-1"/>)">前一页</A>]
+												<B><s:property value="#pageBean.currentPage" /></B>
+												[<A href="javascript:void(0);" onclick="to_page(<s:property value="#pageBean.currentPage+1"/>)">后一页</A>] 
 												到
-												<input type="text" size="3" id="page" name="page" />
+												<input type="text" size="3" id="currentPage" name="currentPage" value="<s:property value="#pageBean.currentPage" />"/>
 												页
 												
-												<input type="button" value="Go" onclick="to_page()"/>
+												<input type="button" value="Go" onclick="to_page($('#currentPage').val())"/>
 											</DIV>
 									</SPAN></TD>
 								</TR>
