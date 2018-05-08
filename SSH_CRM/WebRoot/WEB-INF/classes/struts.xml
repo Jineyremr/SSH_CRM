@@ -9,14 +9,36 @@
 	
 	<package name="crm" namespace="/" extends="struts-default" >
 		
+		<interceptors>
+		<!-- 注册拦截器 -->
+			<interceptor name="privilegeInterceptor" class="cc.web.interceptor.PrivilegeIntercepter"></interceptor>
+			<!-- 配置拦截器栈 -->
+			<interceptor-stack name="mStack">
+				<interceptor-ref name="privilegeInterceptor">
+					<param name="excludeMethods">login,regist</param>
+				</interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		<!-- 配置默认拦截器栈 -->
+		<default-interceptor-ref name="mStack"></default-interceptor-ref>
+		
+		
+		<global-results>
+			<result name="toLogin" type="redirect">/login.jsp</result>
+		</global-results>
+		
 		<global-exception-mappings>
 			<exception-mapping result="error" exception="java.lang.RuntimeException"></exception-mapping>
 		</global-exception-mappings>
 		
 		
 		<action name="UserAction_*" class="userAction" method="{1}">
+			<!-- <result name="toLogin" type="redirect">/login.jsp</result> -->
 			<result name="toHome">/index.htm</result>
 			<result name="error">/login.jsp</result>
+			<result name="regist">/register.jsp</result>
 		</action>
 		
 		<action name="CustomerAction_*" class="customerAction" method="{1}">
@@ -40,6 +62,17 @@
 				<param name="actionName">LinkManAction_list</param>
 			</result>
 			
+		</action>
+		
+		<action name="SaleVisitAction_*" class="saleVisitAction" method="{1}">
+			<result name="edit"  >/jsp/salevisit/add.jsp</result>
+			<result name="list"  >/jsp/salevisit/list.jsp</result>
+			<result name="toList" type="redirectAction">
+				
+				<param name="namespase">/</param>
+				<param name="actionName">SaleVisitAction_list</param>
+			</result>
+			<result name="error">/jsp/salevisit/list.jsp</result>
 		</action>
 		
 	</package>

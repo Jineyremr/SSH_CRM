@@ -56,19 +56,19 @@
 								<td>联系人名称：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="lkm_name" value="<s:property value="#linkMan.lkm_name"/>">
+														style="WIDTH: 180px" maxLength=50 name="lkm_name" value="<s:property value="#linkMan.lkm_name" />" >
 								</td>
 								<td>联系人性别：</td>
 								<td>
-								<input type="radio" value="1" name="lkm_gender" <s:property value="#linkMan.lkm_gender=='1'?'checked':''"/>>男
-								<input type="radio" value="2" name="lkm_gender" <s:property value="#linkMan.lkm_gender=='2'?'checked':''"/>>女
+								<input type="radio" value="1" name="lkm_gender"  <s:property value="#linkMan.lkm_gender=='1'?'checked':''" /> >男
+								<input type="radio" value="2" name="lkm_gender"  <s:property value="#linkMan.lkm_gender=='2'?'checked':''" /> >女
 								</td>
 							</TR>
 							<TR>
 								<td>联系人办公电话 ：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="lkm_phone"  value="<s:property value="#linkMan.lkm_phone" />">
+														style="WIDTH: 180px" maxLength=50 name="lkm_phone" value="<s:property value="#linkMan.lkm_phone" />">
 								</td>
 								<td>联系人手机 ：</td>
 								<td>

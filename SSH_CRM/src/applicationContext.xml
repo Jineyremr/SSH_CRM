@@ -80,6 +80,9 @@
 	<bean name="linkManAction" class="cc.web.action.LinkManAction" scope="prototype">
 		<property name="lms" ref="linkManService"></property>
 	</bean>
+	<bean name="saleVisitAction" class="cc.web.action.SaleVisitAction" scope="prototype">
+		<property name="svs" ref="saleVisitService"></property>
+	</bean>
 	
 	<!-- service -->
 	<bean name="userService" class="cc.service.impl.UserServiceImpl">
@@ -94,6 +97,9 @@
 	<bean name="linkManService" class="cc.service.impl.LinkManServiceImpl">
 		<property name="lmd" ref="linkManDao"></property>
 	</bean>
+	<bean name="saleVisitService" class="cc.service.impl.SaleVisitServiceImpl">
+		<property name="svd" ref="saleVisitDao"></property>
+	</bean>
 	
 	<!-- dao -->
 	
@@ -107,6 +113,9 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	<bean name="linkManDao" class="cc.dao.impl.LinkManDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean name="saleVisitDao" class="cc.dao.impl.SaleVisitDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 </beans>

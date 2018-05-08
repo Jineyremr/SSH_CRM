@@ -20,8 +20,16 @@ public class Customer {
 	
 	//表达一对多
 	private Set<LinkMan> linkMans = new HashSet<LinkMan> ();
+	private Set<SaleVisit> saleVisits = new HashSet<SaleVisit> ();
 	
-	
+	public Set<SaleVisit> getSaleVisits() {
+		return saleVisits;
+	}
+
+	public void setSaleVisits(Set<SaleVisit> saleVisits) {
+		this.saleVisits = saleVisits;
+	}
+
 	public Set<LinkMan> getLinkMans() {
 		return linkMans;
 	}

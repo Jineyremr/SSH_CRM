@@ -24,5 +24,11 @@
 			<key column="lkm_cust_id"></key>
 			<one-to-many class="LinkMan" />
 		</set>
+		
+		<set name="saleVisits">
+			<key column="visit_cust_id"></key>
+			<one-to-many class="SaleVisit"/>
+		</set>
+		
 	</class>
 </hibernate-mapping>
